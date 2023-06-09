@@ -445,7 +445,7 @@
                     <li>
                       <form action="{{route('logout')}}" method="post">
                         @csrf
-                        <button class="dropdown-item" style="border:opx solid !important">Logout</button>
+                        <button class="dropdown-item" style="border:0 solid !important">Logout</button>
                       </form>
                     </li>
                   </ul>
