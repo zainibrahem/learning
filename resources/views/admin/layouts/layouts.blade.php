@@ -3,36 +3,36 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Learning-Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Learning-Admin Dashboard</title>
 
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
 
-      <!-- Library / Plugin Css Build -->
-      <link rel="stylesheet" href="{{asset('assets/css/core/libs.min.css')}}" />
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="{{asset('assets/css/core/libs.min.css')}}" />
 
-      <!-- Aos Animation Css -->
-      <link rel="stylesheet" href="{{asset('assets/vendor/aos/dist/aos.css')}}" />
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/aos/dist/aos.css')}}" />
 
-      <!-- Hope Ui Design System Css -->
-      <link rel="stylesheet" href="{{asset('assets/css/hope-ui.min.css?v=2.0.0')}}" />
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="{{asset('assets/css/hope-ui.min.css?v=2.0.0')}}" />
 
-      <!-- Custom Css -->
-      <link rel="stylesheet" href="{{asset('assets/css/custom.min.css?v=2.0.0')}}" />
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{{asset('assets/css/custom.min.css?v=2.0.0')}}" />
 
-      <!-- Dark Css -->
-      <link rel="stylesheet" href="{{asset('assets/css/dark.min.css')}}"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="{{asset('assets/css/dark.min.css')}}"/>
 
-      <!-- Customizer Css -->
-      <link rel="stylesheet" href="{{asset('assets/css/customizer.min.css')}}" />
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="{{asset('assets/css/customizer.min.css')}}" />
 
-      <!-- RTL Css -->
-      <link rel="stylesheet" href="{{asset('assets/css/rtl.min.css')}}"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="{{asset('assets/css/rtl.min.css')}}"/>
 
       @livewireStyles
   </head>
-  <body class="  ">
+  <body class="">
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -235,7 +235,7 @@
                 </svg>
                 </i>
             </div>
-            <div class="input-group search-input">
+            {{-- <div class="input-group search-input">
               <span class="input-group-text" id="search-input">
                 <svg class="icon-18" width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
@@ -243,7 +243,7 @@
                 </svg>
               </span>
               <input type="search" class="form-control" placeholder="Search...">
-            </div>
+            </div> --}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon">
                   <span class="mt-2 navbar-toggler-bar bar1"></span>
@@ -253,7 +253,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                <li class="me-0 me-xl-2">
+                {{-- <li class="me-0 me-xl-2">
                   <a class="btn btn-primary btn-sm d-flex gap-2 align-items-center" aria-current="page" href="http://hopeui.iqonic.design/pro?utm_source=hopeui-free-demo&utm_medium=hopeui-free-demo&utm_campaign=hopeui-pro-launch" target="_blank">
                     <svg class="icon-16" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M21.4274 2.5783C20.9274 2.0673 20.1874 1.8783 19.4974 2.0783L3.40742 6.7273C2.67942 6.9293 2.16342 7.5063 2.02442 8.2383C1.88242 8.9843 2.37842 9.9323 3.02642 10.3283L8.05742 13.4003C8.57342 13.7163 9.23942 13.6373 9.66642 13.2093L15.4274 7.4483C15.7174 7.1473 16.1974 7.1473 16.4874 7.4483C16.7774 7.7373 16.7774 8.2083 16.4874 8.5083L10.7164 14.2693C10.2884 14.6973 10.2084 15.3613 10.5234 15.8783L13.5974 20.9283C13.9574 21.5273 14.5774 21.8683 15.2574 21.8683C15.3374 21.8683 15.4274 21.8683 15.5074 21.8573C16.2874 21.7583 16.9074 21.2273 17.1374 20.4773L21.9074 4.5083C22.1174 3.8283 21.9274 3.0883 21.4274 2.5783Z" fill="currentColor"></path>
@@ -261,7 +261,7 @@
                     </svg>
                     Go Pro
                   </a>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
                     <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="{{asset('assets/images/Flag/flag001.png')}}" class="img-fluid rounded-circle" alt="user" style="height: 30px; min-width: 30px; width: 30px;">
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                   <a href="#"  class="nav-link" id="notification-drop" data-bs-toggle="dropdown" >
                       <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19.7695 11.6453C19.039 10.7923 18.7071 10.0531 18.7071 8.79716V8.37013C18.7071 6.73354 18.3304 5.67907 17.5115 4.62459C16.2493 2.98699 14.1244 2 12.0442 2H11.9558C9.91935 2 7.86106 2.94167 6.577 4.5128C5.71333 5.58842 5.29293 6.68822 5.29293 8.37013V8.79716C5.29293 10.0531 4.98284 10.7923 4.23049 11.6453C3.67691 12.2738 3.5 13.0815 3.5 13.9557C3.5 14.8309 3.78723 15.6598 4.36367 16.3336C5.11602 17.1413 6.17846 17.6569 7.26375 17.7466C8.83505 17.9258 10.4063 17.9933 12.0005 17.9933C13.5937 17.9933 15.165 17.8805 16.7372 17.7466C17.8215 17.6569 18.884 17.1413 19.6363 16.3336C20.2118 15.6598 20.5 14.8309 20.5 13.9557C20.5 13.0815 20.3231 12.2738 19.7695 11.6453Z" fill="currentColor"></path>
@@ -425,7 +425,7 @@
                         </div>
                       </div>
                   </div>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
                   <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{asset('assets/images/avatars/01.png')}}" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
@@ -443,7 +443,12 @@
                     <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
                     <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
+                    <li>
+                      <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button class="dropdown-item" style="border:opx solid !important">Logout</button>
+                      </form>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -456,17 +461,7 @@
                     <div class="col-md-12">
                         <div class="flex-wrap d-flex justify-content-between align-items-center">
                             <div>
-                                <h1>Hello Devs!</h1>
-                                <p>We are on a mission to help developers like you build successful projects for FREE.</p>
-                            </div>
-                            <div>
-                                <a href="" class="btn btn-link btn-soft-light">
-                                    <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.8251 15.2171H12.1748C14.0987 15.2171 15.731 13.985 16.3054 12.2764C16.3887 12.0276 16.1979 11.7713 15.9334 11.7713H14.8562C14.5133 11.7713 14.2362 11.4977 14.2362 11.16C14.2362 10.8213 14.5133 10.5467 14.8562 10.5467H15.9005C16.2463 10.5467 16.5263 10.2703 16.5263 9.92875C16.5263 9.58722 16.2463 9.31075 15.9005 9.31075H14.8562C14.5133 9.31075 14.2362 9.03619 14.2362 8.69849C14.2362 8.35984 14.5133 8.08528 14.8562 8.08528H15.9005C16.2463 8.08528 16.5263 7.8088 16.5263 7.46728C16.5263 7.12575 16.2463 6.84928 15.9005 6.84928H14.8562C14.5133 6.84928 14.2362 6.57472 14.2362 6.23606C14.2362 5.89837 14.5133 5.62381 14.8562 5.62381H15.9886C16.2483 5.62381 16.4343 5.3789 16.3645 5.13113C15.8501 3.32401 14.1694 2 12.1748 2H11.8251C9.42172 2 7.47363 3.92287 7.47363 6.29729V10.9198C7.47363 13.2933 9.42172 15.2171 11.8251 15.2171Z" fill="currentColor"></path>
-                                        <path opacity="0.4" d="M19.5313 9.82568C18.9966 9.82568 18.5626 10.2533 18.5626 10.7823C18.5626 14.3554 15.6186 17.2627 12.0005 17.2627C8.38136 17.2627 5.43743 14.3554 5.43743 10.7823C5.43743 10.2533 5.00345 9.82568 4.46872 9.82568C3.93398 9.82568 3.5 10.2533 3.5 10.7823C3.5 15.0873 6.79945 18.6413 11.0318 19.1186V21.0434C11.0318 21.5715 11.4648 22.0001 12.0005 22.0001C12.5352 22.0001 12.9692 21.5715 12.9692 21.0434V19.1186C17.2006 18.6413 20.5 15.0873 20.5 10.7823C20.5 10.2533 20.066 9.82568 19.5313 9.82568Z" fill="currentColor"></path>
-                                    </svg>
-                                    Announcements
-                                </a>
+                                <h1>Hello Admin!</h1>
                             </div>
                         </div>
                     </div>
