@@ -75,6 +75,7 @@ class Handler extends ExceptionHandler
                         return Controller::getJsonResponse('mismatch_token', $exception->getMessage(), 419);
                     }
                     return response()->view('errors.419');
+
                 case $exception instanceof ValidationException:
                     if ($request->wantsJson()) {
                         return Controller::getJsonResponse('invalid_data', $exception->errors(), 422);
@@ -86,8 +87,7 @@ class Handler extends ExceptionHandler
 
                 /* Other Exceptions */
                 default:
-                    return  $exception;
-                    if ($request->wantsJson()) {
+                    if ($request && $request->wantsJson()) {
                         return Controller::getJsonResponse('internal_server_error', $exception->getMessage(), 500);
                     }
                     return response()->view('errors.500');
