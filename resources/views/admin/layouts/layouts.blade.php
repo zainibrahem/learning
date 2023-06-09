@@ -5,32 +5,32 @@
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Learning-Admin Dashboard</title>
-      
+
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
-      
+
       <!-- Library / Plugin Css Build -->
       <link rel="stylesheet" href="{{asset('assets/css/core/libs.min.css')}}" />
-      
+
       <!-- Aos Animation Css -->
       <link rel="stylesheet" href="{{asset('assets/vendor/aos/dist/aos.css')}}" />
-      
+
       <!-- Hope Ui Design System Css -->
       <link rel="stylesheet" href="{{asset('assets/css/hope-ui.min.css?v=2.0.0')}}" />
-      
+
       <!-- Custom Css -->
       <link rel="stylesheet" href="{{asset('assets/css/custom.min.css?v=2.0.0')}}" />
-      
+
       <!-- Dark Css -->
       <link rel="stylesheet" href="{{asset('assets/css/dark.min.css')}}"/>
-      
+
       <!-- Customizer Css -->
       <link rel="stylesheet" href="{{asset('assets/css/customizer.min.css')}}" />
-      
+
       <!-- RTL Css -->
       <link rel="stylesheet" href="{{asset('assets/css/rtl.min.css')}}"/>
-      
-      
+
+      @livewireStyles
   </head>
   <body class="  ">
     <!-- loader Start -->
@@ -39,13 +39,13 @@
           <div class="loader-body"></div>
       </div>    </div>
     <!-- loader END -->
-    
+
     <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
             <a href="../dashboard/index.html" class="navbar-brand">
                 <!--Logo start-->
                 <!--logo End-->
-                
+
                 <!--Logo start-->
                 <div class="logo-main">
                     <div class="logo-normal">
@@ -66,10 +66,10 @@
                     </div>
                 </div>
                 <!--logo End-->
-                
-                
-                
-                
+
+
+
+
                 <h4 class="logo-title">Hope UI</h4>
             </a>
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
@@ -105,7 +105,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false" aria-controls="horizontal-menu">
                             <i class="icon">
-                                
+
                                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-20">
                                     <path opacity="0.4" d="M10.0833 15.958H3.50777C2.67555 15.958 2 16.6217 2 17.4393C2 18.2559 2.67555 18.9207 3.50777 18.9207H10.0833C10.9155 18.9207 11.5911 18.2559 11.5911 17.4393C11.5911 16.6217 10.9155 15.958 10.0833 15.958Z" fill="currentColor"></path>
                                     <path opacity="0.4" d="M22.0001 6.37867C22.0001 5.56214 21.3246 4.89844 20.4934 4.89844H13.9179C13.0857 4.89844 12.4102 5.56214 12.4102 6.37867C12.4102 7.1963 13.0857 7.86 13.9179 7.86H20.4934C21.3246 7.86 22.0001 7.1963 22.0001 6.37867Z" fill="currentColor"></path>
@@ -156,7 +156,7 @@
                                             </g>
                                         </svg>
                                     </i>
-                                    <i class="sidenav-mini-icon"> D </i>                   
+                                    <i class="sidenav-mini-icon"> D </i>
                                     <span class="item-name">Dual Compact</span>
                                 </a>
                             </li>
@@ -201,7 +201,7 @@
             <a href="../dashboard/index.html" class="navbar-brand">
                 <!--Logo start-->
                 <!--logo End-->
-                
+
                 <!--Logo start-->
                 <div class="logo-main">
                     <div class="logo-normal">
@@ -222,10 +222,10 @@
                     </div>
                 </div>
                 <!--logo End-->
-                
-                
-                
-                
+
+
+
+
                 <h4 class="logo-title">Hope UI</h4>
             </a>
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
@@ -487,45 +487,46 @@
       <div class="conatiner-fluid content-inner mt-n5 py-0">
         <div class="row">
             <div class="col-sm-12">
+
                @yield('content')
             </div>
         </div>
       </div>
-    
+
     </main>
     <!-- Wrapper End-->
-   
+
 
     <!-- Library Bundle Script -->
     <script src="{{asset('assets/js/core/libs.min.js')}}"></script>
-    
+
     <!-- External Library Bundle Script -->
     <script src="{{asset('assets/js/core/external.min.js')}}"></script>
-    
+
     <!-- Widgetchart Script -->
     <script src="{{asset('assets/js/charts/widgetcharts.js')}}"></script>
-    
+
     <!-- mapchart Script -->
     <script src="{{asset('assets/js/charts/vectore-chart.js')}}"></script>
     <script src="{{asset('assets/js/charts/dashboard.js')}}" ></script>
-    
+
     <!-- fslightbox Script -->
     <script src="{{asset('assets/js/plugins/fslightbox.js')}}"></script>
-    
+
     <!-- Settings Script -->
     <script src="{{asset('assets/js/plugins/setting.js')}}"></script>
-    
+
     <!-- Slider-tab Script -->
     <script src="{{asset('assets/js/plugins/slider-tabs.js')}}"></script>
-    
+
     <!-- Form Wizard Script -->
     <script src="{{asset('assets/js/plugins/form-wizard.js')}}"></script>
-    
+
     <!-- AOS Animation Plugin-->
     <script src="{{asset('assets/vendor/aos/dist/aos.js')}}"></script>
-    
+
     <!-- App Script -->
     <script src="{{asset('assets/js/hope-ui.js')}}" defer></script>
-    
+    @livewireScripts
   </body>
 </html>
