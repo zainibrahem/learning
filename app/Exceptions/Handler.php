@@ -5,6 +5,7 @@ namespace App\Exceptions;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
@@ -33,7 +34,8 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $exception,$request) {
+        $this->reportable(function (Throwable $exception,$request=null) {
+
             switch ($exception) {
                 case $exception instanceof RouteNotFoundException:
                     if ($request->wantsJson()) {
@@ -73,15 +75,19 @@ class Handler extends ExceptionHandler
                         return Controller::getJsonResponse('mismatch_token', $exception->getMessage(), 419);
                     }
                     return response()->view('errors.419');
+
                 case $exception instanceof ValidationException:
                     if ($request->wantsJson()) {
                         return Controller::getJsonResponse('invalid_data', $exception->errors(), 422);
                     }
                     return back()->with($exception->errors(), 422);
 
+                case $exception instanceof QueryException:
+                    return $exception;
+
                 /* Other Exceptions */
                 default:
-                    if ($request->wantsJson()) {
+                    if ($request && $request->wantsJson()) {
                         return Controller::getJsonResponse('internal_server_error', $exception->getMessage(), 500);
                     }
                     return response()->view('errors.500');
