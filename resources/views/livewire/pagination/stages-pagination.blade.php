@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title">Stages</h4>
             </div>
         </div>
         <div class="card-body">
@@ -41,16 +41,15 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
+                                <th>created by</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $item)
+                            @foreach($stages as $item)
                                 <tr>
                                     <th>{{$item->id}}</th>
                                     <th>{{$item->name}}</th>
-                                    <th>{{$item->email}}</th>
-
+                                    <th>{{$item->creator->email}}</th>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -58,13 +57,13 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
+                                <th>created by</th>
 
                             </tr>
                             </tfoot>
                         </table>
                     </div>
-                    {{ $users->links() }}
+                    {{ $stages->links() }}
                 </div>
             </div>
         </div>

@@ -18,7 +18,11 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     });
+
+    Route::get('/stages', function () {
+        return view('admin.stages');
+    })->name("stages.index");
 });
-Auth::routes();
+\Illuminate\Support\Facades\Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
