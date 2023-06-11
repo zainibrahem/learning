@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Stage extends Model
 {
@@ -13,8 +15,15 @@ class Stage extends Model
 
 
 
-    public function creator(){
+    public function creator():HasOne
+    {
         return $this->hasOne(User::class,'id');
+    }
+
+
+    public function subjects(): HasMany
+    {
+        return $this->hasMany(Subject::class,'stage_id');
     }
 
 }

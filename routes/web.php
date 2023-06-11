@@ -22,6 +22,24 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
     Route::get('/stages', function () {
         return view('admin.stages');
     })->name("stages.index");
+
+Route::group(['prefix'=>"/subjects"],function(){
+
+    Route::get('/', function () {
+        return view('admin.subjects',["type"=>"view"]);
+    })->name("subjects.index",);
+
+    Route::get('/create', function () {
+
+        return view('admin.subjects',["type"=>"create"]);
+    })->name("subject.create");
+
+    Route::get('/show/{id}', function ($id) {
+        return view('admin.subjects',["type"=>"view_one","id"=>$id]);
+    })->name("subjects.show");
+
+});
+
 });
 \Illuminate\Support\Facades\Auth::routes();
 
