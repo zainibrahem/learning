@@ -23,7 +23,7 @@ class Files extends Component
     use WithFileUploads;
 
     protected string $paginationTheme = 'bootstrap';
-    public string $searchTerm;
+    public  $searchTerm;
     public int $limit = 10;
     public bool $isCreate = false;
     public Collection $subjects;
