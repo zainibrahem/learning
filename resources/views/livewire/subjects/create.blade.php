@@ -10,11 +10,7 @@
         </div>
         <div class="card-body">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="header-title">
-                        <h4 class="card-title">Custom Validation</h4>
-                    </div>
-                </div>
+
                 <div class="card-body">
                     <p></p>
                     <form class="row g-3 needs-validation" wire:submit.prevent="submit">
@@ -37,7 +33,7 @@
                                     @endif
 
                                 </select>
-                                @error('name') <span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span> @enderror
+                                @error('teacher') <span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span> @enderror
 
                         </div>
 
@@ -50,7 +46,7 @@
                                 <option value="2">Secondary</option>
                                 <option value="3">High school</option>
                             </select>
-                            @error('name')<span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
+                            @error('stage')<span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
 
                         </div>
 
@@ -60,39 +56,29 @@
                             <input type="file" class="form-select" id="image" wire:model="image" required />
 
                             <div wire:loading wire:target="image">Uploading...</div>
-                            @error('name')<span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
+                            @error('image')<span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
+                            <div class="pt-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">
+                                        Agree to terms and conditions
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        You must agree before submitting.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-5">
+                                <button class="btn btn-primary" type="submit">Submit form</button>
+                            </div>
 
                         </div>
                         <div class="col-md-6">
-
                             @if ($image)
-
-
-
-
-                                        <img width="70%" src="{{ $image->temporaryUrl() }}"/>
-
-
-
+                                  <img width="70%" src="{{ $image->temporaryUrl() }}" alt="subject image"/>
                             @endif
                         </div>
-
-
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                <label class="form-check-label" for="invalidCheck">
-                                    Agree to terms and conditions
-                                </label>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
-                        </div>
-                    </form>
+                </form>
                 </div>
             </div>
 

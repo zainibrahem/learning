@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Subjects;
 
 use App\Models\Subject;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -36,15 +38,17 @@ class Create extends Component
     {
         //Todo handle the teacher
         $this->validate();
-        $fileName = uniqid();
-        $this->image->storeAs('subjects', $fileName . '.png');
+
+       $data= $this->image->store('public/subjects');
+
+      $data=Str::replace('public','storage',$data);
 
         Subject::create([
             'name' => $this->name,
             'stage_id' => $this->stage,
-            'image' => 'subjects/' . $fileName,
+            'image' =>$data,
         ]);
-        return redirect()->to('/subjects');
+        return redirect()->to('/subjects')->with(['success'=>'Subject is updated !']);
     }
 
     public function render()

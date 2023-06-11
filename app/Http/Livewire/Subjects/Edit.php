@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Subjects;
 
 use App\Models\Stage;
 use App\Models\Subject;
+use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Edit extends Component
 {
+    use WithFileUploads;
     public $data;
     public $subject;
 
@@ -26,10 +29,10 @@ class Edit extends Component
 
 
     protected $rules = [
-        'name1' => 'sometimes|min:4',
-        'stage1' => 'sometimes|exists:stages,id',
-        'image1' => 'sometimes|image|max:1024',
-        'teacher1' => 'sometimes',
+        'name' => 'sometimes|min:4',
+        'stage' => 'sometimes',
+        'image1' => 'sometimes',
+        'teacher' => 'sometimes',
     ];
 
     public function updated($propertyName)
@@ -38,32 +41,71 @@ class Edit extends Component
 
     }
 
+    public function updateName()
+    {
+        // Perform any action with the new value here
+        // For example, you can update the property value
+        $this->name = $this->name; // This is just to trigger the property update
+    }
+
+    public function updateImage()
+    {
+        // Perform any action with the new value here
+        // For example, you can update the property value
+        $this->image = $this->image1; // This is just to trigger the property update
+    }
+
+    public function updateStage()
+    {
+        // Perform any action with the new value here
+        // For example, you can update the property value
+        $this->stage = $this->stage; // This is just to trigger the property update
+    }
+
 
     public function submit()
     {
         //Todo handle the teacher
-        $this->validate();
-        dd($this);
-        $fileName = uniqid();
-        $this->image->storeAs('subjects', $fileName . '.png');
+      $data= $this->validate();
 
-        Subject::create([
-            'name' => $this->name,
-            'stage_id' => $this->stage,
-            'image' => 'subjects/' . $fileName,
-        ]);
-        return redirect()->to('/subjects');
+       if ($data['image1']){
+           $imagePath= $this->image1->store('public/subjects');
+
+           $imagePath=Str::replace('public','storage',$imagePath);
+
+           Subject::query()->where('id',$this->data)->update([
+               'name' => $this->name,
+               'stage_id' => $this->stage,
+               'image'=>$imagePath
+           ]);
+
+       }else{
+           Subject::query()->where('id',$this->data)->update([
+               'name' => $this->name,
+               'stage_id' => $this->stage,
+           ]);
+
+       }
+
+
+
+        return redirect()->to('/subjects')->with(['success'=>'Subject is updated !']);
     }
 
-
-    public function render()
+    public function mount()
     {
         $subject= Subject::query()->where("id",$this->data)->first();
         $this->subject=$subject;
         $this->name=$subject->name;
-        $this->stage=$subject->stage->name;
+        $this->stage=$subject->stage->id;
         $this->image=$subject->image;
         $this->teacher = $subject;
+    }
+
+    public function render()
+    {
+        $subject= Subject::query()->where("id",$this->data)->first();
+
         $this->otherStage=Stage::query()->where("id",'<>',$subject->stage->id)->get();
         return view('livewire.subjects.edit');
     }
