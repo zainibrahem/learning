@@ -15,13 +15,29 @@ use App\Http\Controllers\TeacherController;
 |
 */
 
-
+// eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_lLbmMsNmBvjVAQF6nDfAp8-fMhc
 Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     });
     Route::get('/generate-new-code',[MiroController::class,'generateCode']);
     Route::get('/getMiroCode',[MiroController::class,'getMiroCode']);
+    Route::group(['prefix'=>"/subjects"],function(){
+
+        Route::get('/', function () {
+            return view('admin.subjects',["type"=>"view"]);
+        })->name("subjects.index",);
+    
+        Route::get('/create', function () {
+    
+            return view('admin.subjects',["type"=>"create"]);
+        })->name("subject.create");
+    
+        Route::get('/show/{id}', function ($id) {
+            return view('admin.subjects',["type"=>"view_one","id"=>$id]);
+        })->name("subjects.show");
+    
+    });
 });
 
 Route::group(['middleware' => ['role:teacher','auth']], function () {
@@ -31,22 +47,7 @@ Route::group(['middleware' => ['role:teacher','auth']], function () {
         return view('admin.stages');
     })->name("stages.index");
 
-Route::group(['prefix'=>"/subjects"],function(){
 
-    Route::get('/', function () {
-        return view('admin.subjects',["type"=>"view"]);
-    })->name("subjects.index",);
-
-    Route::get('/create', function () {
-
-        return view('admin.subjects',["type"=>"create"]);
-    })->name("subject.create");
-
-    Route::get('/show/{id}', function ($id) {
-        return view('admin.subjects',["type"=>"view_one","id"=>$id]);
-    })->name("subjects.show");
-
-});
 
 });
 \Illuminate\Support\Facades\Auth::routes();

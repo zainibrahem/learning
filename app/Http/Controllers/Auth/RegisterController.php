@@ -74,24 +74,20 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
             $user->assignRole('teacher');
-            
             $teamMember = Setting::where('key','MIRO_TEAMID')->first();
-            generateNewMiroToken()->then(function() use($user,$teamMember){
-                $data = [
-                    'description' => $user->name,
-                    'name' => $user->name,
-                    'teamId' => $teamMember->value,
-                ];
-                createNewBoard($user,$data);
+            $data = [
+                'description' => $user->name,
+                'name' => $user->name,
+                'teamId' => $teamMember->value,
+            ];
+            $createBoardResponse =  createNewBoard($user,$data);
+            $createBoardResponse->then(function($res) use($user){
+                $user->board_id = json_decode($res)->id;
+                $user->save();
             })->otherwise(function($error){
                 return $error;
             });
-           
                 
-              
-       
-
-           
             return $user;
         }
         catch(\Exception $e){

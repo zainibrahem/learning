@@ -14,6 +14,7 @@ class MiroController extends Controller
         $teamId = Setting::where('key','MIRO_TEAMID')->first();
         $url = "https://miro.com/oauth/authorize?response_type=code&client_id=".$clientId->value."&redirect_uri=http://127.0.0.1:8000/getMiroCode&team_id=".$teamId->value;
         return redirect()->away($url)->with('_blank');
+        
     }
 
     public function getMiroCode(){
@@ -23,6 +24,7 @@ class MiroController extends Controller
                 $token = Setting::where('key','MIRO_TOKEN')->first();
                 $token->value = json_decode($res)->access_token;
                 $token->save();
+                
                 $refresh_token = Setting::where('key','MIRO_REFRESHTOKEN')->first();
                 $refresh_token->value = json_decode($res)->refresh_token;
                 $refresh_token->save();

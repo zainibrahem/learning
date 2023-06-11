@@ -11,8 +11,8 @@ if(!function_exists('generateMiroCode')){
         $clientId = Setting::where('key','MIRO_CLIENTID')->first();
         $teamId = Setting::where('key','MIRO_TEAMID')->first();
         $url = "https://miro.com/oauth/authorize?response_type=code&client_id=".$clientId."&redirect_uri=https://127.0.0.1:8000/&state=123xyz&team_id=".$teamId;
+        
         return redirect()->away($url)->with('_blank');
-     
     }
 }
 
@@ -25,7 +25,6 @@ if(!function_exists('MiroFirstToken')){
         $url = 'https://api.miro.com/v1/oauth/token?grant_type=authorization_code&client_id='.$clientId->value.'&client_secret='.$clientSecret->value.'&code='.$code.'&redirect_uri=http://127.0.0.1:8000/getMiroCode';
         $promise = new Promise();
         $request = new Request('POST',$url,[]);
-      
         $response = $client->sendAsync($request);
         $response->then(function($res) use($promise){
             $promise->resolve($res->getBody());
@@ -35,6 +34,7 @@ if(!function_exists('MiroFirstToken')){
             dd($error);
         }));
         $response->wait();
+
         return $promise;
     }
 }
@@ -60,9 +60,8 @@ if (!function_exists('generateNewMiroToken')) {
             }
         );
         $response->wait();
-        return $promise;
 
-       
+        return $promise;
     }
 }
 
@@ -70,30 +69,30 @@ if (!function_exists('createNewBoard')) {
    
     function createNewBoard($user,$data)
     {
-        
         $client = new Client();
         $promise = new Promise();
         $url = 'https://api.miro.com/v2/boards'; // Replace with your API endpoint URL
         $token = Setting::where('key','MIRO_TOKEN')->first();
         $headers = [
             'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer '.$token->value,
+            'authorization' => 'Bearer '.$token->value,
         ];
         $request = new Request('POST', $url, $headers);
         $options = ['json' => $data];
-        
         $response = $client->sendAsync($request, $options);
         $response->then(
             function ($response) use ($promise) {
                 
                 $promise->resolve($response->getBody());
             },
-            function ($reason) use ($promise) {
+            function ($reason) use ($promise,$request) {
+                dd($reason);
+                dd($request);
                 $promise->reject($reason);
             }
         );
-
         $response->wait();
+
         return $promise;
 
        
@@ -109,14 +108,6 @@ if (!function_exists(('deleteBoard'))){
        
         $client = new \GuzzleHttp\Client();
         
-        // $response = $client->request('DELETE', 'https://api.miro.com/v2/boards/'.Auth::user()->board_id, [
-        //     'headers' => [
-        //         'accept' => 'application/json',
-        //         'authorization' => 'Bearer '.$token->value,
-        //     ]
-        // ]);
-       
-        // echo $response->getBody();
         $request = new Request('DELETE',$url,$headers);
         $response = $client->sendAsync($request);
         $response->then(
@@ -130,31 +121,6 @@ if (!function_exists(('deleteBoard'))){
         );
         $response->wait();
 
-
-        // $request = new Request("DELETE", $url, $headers);
-        
-        // $response = $client->request('DELETE',$url,['headers'=> [
-        //     'Content-Type' => 'application/json',
-        //     'Authorization' => 'Bearer '.$token->value
-        // ]]);
-        
-        // $response->then(
-            
-        //     function ($res) use($promise,$token) {
-        //         Auth::user()->board_id ='';
-               
-        //         $promise->resolve($res->getBody());
-        //     },
-        //     function ($e) use($promise){
-                
-        //         dd($e->getMessage());
-        //         $promise->reject($e->getMessage());
-        //     }
-            
-        // );
-        
-       
-        // $response->wait();
         return $promise;  
     }
 }

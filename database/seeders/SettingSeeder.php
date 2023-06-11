@@ -14,11 +14,11 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            ['key' => 'MIRO_TOKEN','value'=>'eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_yzHEC_vFSq7N5y2HjGbOOTLQMl0'],
-            ['key' => 'MIRO_REFRESHTOKEN','value'=>'eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_QAwWtj8947eqPpA9NF9qXB-ecwU'],
-            ['key' => 'MIRO_CLIENTID','value'=>'3458764556746169991'],
-            ['key' => 'MIRO_CLIENTSECRET','value'=>'gehYIlSjGhGdJEnNQWaWYrAcYgtQ125O'],
-            ['key' => 'MIRO_TEAMID','value'=>'3458764556746169967'],
+            ['key' => 'MIRO_TOKEN','value'=>env('MIRO_TOKEN')],
+            ['key' => 'MIRO_REFRESHTOKEN','value'=>env('MIRO_REFRESHTOKEN')],
+            ['key' => 'MIRO_CLIENTID','value'=>env('MIRO_CLIENTID')],
+            ['key' => 'MIRO_CLIENTSECRET','value'=>env('MIRO_CLIENTSECRET')],
+            ['key' => 'MIRO_TEAMID','value'=>env('MIRO_TEAMID')],
         ];
         DB::table('settings')->insert($settings);
     }
