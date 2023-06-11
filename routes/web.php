@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\MiroController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TeacherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware' => ['role:admin','auth']], function () {
+Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     });
+    Route::get('/generate-new-code',[MiroController::class,'generateCode']);
+    Route::get('/getMiroCode',[MiroController::class,'getMiroCode']);
+});
+
+Route::group(['middleware' => ['role:teacher','auth']], function () {
+    Route::get('/board',[TeacherController::class,'board']);
 });
 Auth::routes();
 
