@@ -18,6 +18,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'MIRO_CLIENTID' => '3458764556746169991',
+    'MIRO_CLIENDSECRET' => 'gehYIlSjGhGdJEnNQWaWYrAcYgtQ125O',
+    'MIRO_REFRESHTOKEN' => 'eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_Mg0f0A7a7in3-RQUjDVn1Y2qR9o',
+    'MIRO_TOKEN' => 'eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_2zgWEviz-MCTvHqk-dQWrMtXmM4',
+    'MIRO_TEAMID' => '3458764556746169967',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
