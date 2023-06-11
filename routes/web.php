@@ -24,12 +24,19 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
     Route::get('/getMiroCode',[MiroController::class,'getMiroCode']);
 });
 
-Route::group(['middleware' => ['role:teacher','auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/board',[TeacherController::class,'board']);
 
     Route::get('/stages', function () {
         return view('admin.stages');
     })->name("stages.index");
+
+    Route::group(['prefix'=>"/files"],function(){
+        Route::get('/', function () {
+            return view('admin.files');
+        })->name("files.index",);
+
+    });
 
 Route::group(['prefix'=>"/subjects"],function(){
 
