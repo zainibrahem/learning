@@ -26,7 +26,29 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
 
 Route::group(['middleware' => ['role:teacher','auth']], function () {
     Route::get('/board',[TeacherController::class,'board']);
+
+    Route::get('/stages', function () {
+        return view('admin.stages');
+    })->name("stages.index");
+
+Route::group(['prefix'=>"/subjects"],function(){
+
+    Route::get('/', function () {
+        return view('admin.subjects',["type"=>"view"]);
+    })->name("subjects.index",);
+
+    Route::get('/create', function () {
+
+        return view('admin.subjects',["type"=>"create"]);
+    })->name("subject.create");
+
+    Route::get('/show/{id}', function ($id) {
+        return view('admin.subjects',["type"=>"view_one","id"=>$id]);
+    })->name("subjects.show");
+
 });
-Auth::routes();
+
+});
+\Illuminate\Support\Facades\Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
