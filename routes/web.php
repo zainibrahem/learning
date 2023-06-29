@@ -26,7 +26,7 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
     Route::get('/generate-new-code',[MiroController::class,'generateCode']);
     Route::get('/getMiroCode',[MiroController::class,'getMiroCode']);
     Route::get('/board',[TeacherController::class,'board']);
-  
+
     // Route for displaying the PDF upload form
     Route::get('/pdf/upload', [PDFEditorController::class, 'showUploadForm'])->name('pdf.upload');
 
@@ -44,14 +44,26 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
     Route::get('/home', function () {
         return view('admin.dashboard');
     })->name('home');
-   
+
 });
 
 
 Route::group(['middleware' => ['role:admin','auth']], function () {
-    Route::get('/stages', function () {
-        return view('admin.stages');
-    })->name("stages.index");
+
+    Route::group(['prefix'=>"/stages"],function(){
+        Route::get('/', function () {
+            return view('admin.stages',["type"=>"view"]);
+        })->name("stages.index");
+        Route::get('/create',function (){
+            return view('admin.stages',["type"=>"create"]);
+        })->name("stages.create");
+
+        Route::get('/edit/{id}',function ($id){
+            return view('admin.stages',["type"=>"edit",'id'=>$id]);
+        })->name("stages.edit");
+
+    });
+
 
     Route::group(['prefix'=>"/files"],function(){
         Route::get('/', function () {
@@ -75,7 +87,10 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
             return view('admin.subjects',["type"=>"view_one","id"=>$id]);
         })->name("subjects.show");
 
+
+
     });
+
 
 });
 \Illuminate\Support\Facades\Auth::routes();

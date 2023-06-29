@@ -1,7 +1,5 @@
 <div>
-    @php
-        $teachers=\App\Models\User::query()->orderByDesc("id")->limit(5)->get();
-    @endphp
+
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
@@ -9,6 +7,7 @@
             </div>
         </div>
         <div class="card-body">
+
             <div class="card">
 
                 <div class="card-body">
@@ -39,12 +38,12 @@
 
                         <div class="col-md-8">
 
-                            <label for="validationCustom04" class="form-label">State</label>
+                            <label for="validationCustom04" class="form-label">Stage</label>
                             <select class="form-select" id="validationCustom04" wire:model="stage" required>
                                 <option selected disabled value="">Choose...</option>
-                                <option value="1">Primary</option>
-                                <option value="2">Secondary</option>
-                                <option value="3">High school</option>
+                                @foreach($stages as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
                             </select>
                             @error('stage')<span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
 
@@ -52,24 +51,14 @@
 
                         <div class="col-md-6">
 
-                            <label for="image" class="form-label">State</label>
+                            <label for="image" class="form-label">Image</label>
                             <input type="file" class="form-select" id="image" wire:model="image" required />
 
                             <div wire:loading wire:target="image">Uploading...</div>
                             @error('image')<span class="error" style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
+
                             <div class="pt-5">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                    <label class="form-check-label" for="invalidCheck">
-                                        Agree to terms and conditions
-                                    </label>
-                                    <div class="invalid-feedback">
-                                        You must agree before submitting.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pt-5">
-                                <button class="btn btn-primary" type="submit">Submit form</button>
+                                <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
 
                         </div>

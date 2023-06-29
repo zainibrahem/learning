@@ -62,4 +62,10 @@ class SubjectController extends Controller
     {
         //
     }
+
+
+    public function removeTeacher($subjectId,$teacherId)
+    {
+
+    }
 }

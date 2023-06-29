@@ -47,7 +47,7 @@ class User extends Authenticatable
     ];
 
     public function subjects(){
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class,'teacher_subject','teacher_id','subject_id');
     }
     public function files():HasMany{
         return $this->hasMany(File::class,'created_by','id');

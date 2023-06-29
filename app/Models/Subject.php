@@ -32,7 +32,7 @@ class Subject extends Model
         return $this->hasOne(Stage::class,'id','stage_id');
     }
     public function teachers(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'teacher_subject','subject_id','teacher_id');
     }
 
     public function files():HasMany{

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Subjects;
 
+use App\Models\Stage;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +18,8 @@ class Create extends Component
     public $stage;
     public $image;
     public $teacher = '';
+    public $stages;
+    public $teachers;
 
 
 
@@ -43,16 +46,23 @@ class Create extends Component
 
       $data=Str::replace('public','storage',$data);
 
-        Subject::create([
+      $teacher=User::query()->where('id',$this->teacher)->first();
+
+       $subject= Subject::create([
             'name' => $this->name,
             'stage_id' => $this->stage,
             'image' =>$data,
         ]);
+        $subject->teachers()->sync($teacher);
         return redirect()->to('/subjects')->with(['success'=>'Subject is updated !']);
     }
 
     public function render()
     {
+        $this->stages=Stage::query()->get();
+        $this->teachers=\App\Models\User::query()->whereHas("roles",function ($query){
+            $query->where('id',2);
+        })->orderByDesc("id")->limit(5)->get();
         return view('livewire.subjects.create');
     }
 }
