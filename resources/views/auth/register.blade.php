@@ -94,6 +94,36 @@
                                   <input id="confirm-password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                </div>
                             </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                 <label for="" class="form-label">Stage</label>
+                                 <select name="stages" class="form-control" id="stages">
+                                    @if ($data['stages'])
+                                        @foreach ($data['stages'] as $stage)
+                                            <option value="{{$stage->id}}">{{$stage->name}}</option>
+                                        @endforeach
+                                    @endif
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <div class="form-group">
+                                 <label for="confirm-password" class="form-label">Subject</label>
+                                 <select name="subjects[]" multiple class="form-control" id="subjects">
+                                 </select>
+                              </div>
+                           </div>
+
+                           <div class="pt-5 pb-5">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" name="all" id="all">
+                                  <label class="form-check-label" for="all">
+                                      Choose All stages and subjects
+                                  </label>
+                              </div>
+                          </div>
+
+
                             {{-- <div class="col-lg-12 d-flex justify-content-center">
                                <div class="form-check mb-3">
                                   <input type="checkbox" class="form-check-input" id="customCheck1">
@@ -142,5 +172,37 @@
        </div>   
     </div>
  </section>
+<script>
+   $(document).on('change','#stages',function(){
+      var csrf = $('meta[name="csrf"]').attr('content');
+      $.ajax({
+         url:"/stages/"+$(this).val()+"/subjects",
+         headers:{
+            'X-CSRF-TOKEN': csrf
+         },
+         type:"GET",
+         success:function(data){
+            console.log(data);
+            var options = '';
+            data.map((subject)=>{
+               options += '<option value="'+subject.id+'">'+subject.name+'</option>';
+            })
+            $('#subjects').html(options);
+         },
+         error:function(e){
 
+         }
+      })
+   })
+   $(document).on('change','#all',function(){
+      if($(this).is(':checked')){
+         $('#stages').attr('disabled','disabled')
+         $('#subjects').attr('disabled','disabled')
+      }
+      else{
+         $('#stages').removeAttr('disabled')
+         $('#subjects').removeAttr('disabled')
+      }
+   })
+</script>
 @endsection

@@ -28,7 +28,7 @@
                                     <option style="border-bottom:1px solid deepskyblue ; padding-bottom: 10px "  disabled value="">Choose Teachers</option>
                                     @if($teachers)
                                         @foreach($teachers as $item)
-                                            <option style="border-bottom:1px solid deepskyblue ; padding-bottom: 10px " value="{{$item->id}}">{{$item->id}}</option>
+                                            <option style="border-bottom:1px solid deepskyblue ; padding-bottom: 10px " value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
                                     @endif
 

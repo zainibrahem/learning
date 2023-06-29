@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Stage;
+use App\Models\Subject;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\TeacherSubject;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Http;
 
@@ -56,6 +59,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['sometimes'],
+            'stages' => ['sometimes'],
+            'subjects' => ['sometimes'],
+            'all' => ['sometimes'],
         ]);
     }
 
@@ -74,24 +81,56 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
             $user->assignRole('teacher');
-            $teamMember = Setting::where('key','MIRO_TEAMID')->first();
-            $data = [
-                'description' => $user->name,
-                'name' => $user->name,
-                'teamId' => $teamMember->value,
-            ];
-            $createBoardResponse =  createNewBoard($user,$data);
-            $createBoardResponse->then(function($res) use($user){
-                $user->board_id = json_decode($res)->id;
-                $user->save();
-            })->otherwise(function($error){
-                return $error;
-            });
+
+            
+
+            if(isset($data['all']) && is_null($data['all'])){
+                foreach($data['subjects'] as $subject){
+                    $teacherSubject = new TeacherSubject();
+                    $teacherSubject->teacher_id = $user->id;
+                    $teacherSubject->subject_id = $subject;
+                    $teacherSubject->save();
+                }
+            }
+            else{
+                $subjects = Subject::all();
+                foreach($subjects as $subject){
+                    $teacherSubject = new TeacherSubject();
+                    $teacherSubject->teacher_id = $user->id;
+                    $teacherSubject->subject_id = $subject->id;
+                    $teacherSubject->save();
+                }
+            }
+            // $teamMember = Setting::where('key','MIRO_TEAMID')->first();
+            // $data = [
+            //     'description' => $user->name,
+            //     'name' => $user->name,
+            //     'teamId' => $teamMember->value,
+            // ];
+            // $createBoardResponse =  createNewBoard($user,$data);
+            // $createBoardResponse->then(function($res) use($user){
+            //     $user->board_id = json_decode($res)->id;
+            //     $user->save();
+            // })->otherwise(function($error){
+            //     return $error;
+            // });
+
+
                 
             return $user;
         }
         catch(\Exception $e){
-            dd($e->getMessage());            
+            dd($e);          
         }
+    }
+
+    protected function showRegistrationForm(){
+        $data['stages'] = Stage::all();
+        return view('auth.register',compact('data'));
+    }
+
+    public function getSubjects($id){
+        $subjects = Subject::where('stage_id',$id)->get();
+        return $subjects;
     }
 }

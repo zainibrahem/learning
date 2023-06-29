@@ -30,6 +30,8 @@ class Subject extends Model
     {
         return $this->hasOne(Stage::class,'id','stage_id');
     }
-
+    public function teachers(){
+        return $this->belongsToMany(User::class);
+    }
 
 }
