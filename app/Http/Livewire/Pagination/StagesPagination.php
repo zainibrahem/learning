@@ -8,7 +8,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 class StagesPagination extends Component
-{use WithPagination;
+{
+    use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
     public $searchTerm;
@@ -18,7 +19,7 @@ class StagesPagination extends Component
     public function render()
     {
 
-        $searchTerm ='%' . $this->searchTerm .'%';
+        $searchTerm = '%' . $this->searchTerm . '%';
 
         $limit = $this->limit;
 
@@ -27,6 +28,6 @@ class StagesPagination extends Component
         paginate($limit);
 
 
-        return view('livewire.pagination.stages-pagination',['stages'=>$stages]);
+        return view('livewire.pagination.stages-pagination', ['stages' => $stages]);
     }
 }

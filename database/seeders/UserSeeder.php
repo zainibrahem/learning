@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123456'),
         ]);
 
-        for ($i=1 ; $i<500; $i++){
+        for ($i=1 ; $i<20; $i++){
             DB::table('users')->insert([
                 'name' => 'Admin'.$i,
                 'email' => 'admin'.$i.'@admin.com',
