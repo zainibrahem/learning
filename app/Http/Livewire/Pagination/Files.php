@@ -16,6 +16,8 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
+
 
 class Files extends Component
 {
@@ -29,7 +31,7 @@ class Files extends Component
     public Collection $subjects;
 
     public  $name, $file, $path, $subject;
-
+    public $fileInput;
 
     public function showModel()
     {
@@ -64,12 +66,13 @@ class Files extends Component
         $data = $this->file->store('public/files');
 
         $data = Str::replace('public', 'storage', $data);
-
+        
         File::query()->create([
             'name' => $this->name,
             'subject_id' => $this->subject,
             'type' => $this->file->getMimeType(),
             'path' => $data,
+            'image' => 'filename.png',
         ]);
         return redirect()->to('/files')->with(['success' => 'File is Added  !']);
     }
@@ -93,5 +96,13 @@ class Files extends Component
             ->paginate($limit);
         return view('livewire.pagination.files',
             ['files' => $files]);
+    }
+    
+
+    public function fileInputChange()
+    {
+        // Perform any necessary Livewire component logic here
+
+        $this->emit('fileInputChange');
     }
 }

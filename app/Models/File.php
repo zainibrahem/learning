@@ -16,6 +16,7 @@ class File extends Model
         'name',
         'path',
         'type',
+        'image',
         'subject_id',
         'created_by',
     ];
