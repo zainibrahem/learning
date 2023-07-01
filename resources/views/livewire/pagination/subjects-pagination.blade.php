@@ -9,7 +9,7 @@
             </div>
 
             <div class="header-title">
-                <a href="{{route("subject.create")}}" class="card-title">Add subject</a>
+                <a  href="{{route("subject.create")}}" class="btn btn-outline-primary">Add subject</a>
             </div>
         </div>
         <div class="card-body">

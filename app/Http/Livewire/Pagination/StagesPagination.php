@@ -14,6 +14,9 @@ class StagesPagination extends Component
     protected $paginationTheme = 'bootstrap';
     public $searchTerm;
     public $limit = 10;
+    public $editModel=false;
+
+
 
 
     public function render()

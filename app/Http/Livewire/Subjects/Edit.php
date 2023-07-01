@@ -102,8 +102,16 @@ class Edit extends Component
         $this->teacher = $subject;
     }
 
+    public function removeTeacher($teacherId):void{
+        $this->subject->teachers()->detach($teacherId);
+        $this->render();
+    }
+
+
+
     public function render()
     {
+
         $subject= Subject::query()->where("id",$this->data)->first();
 
         $this->otherStage=Stage::query()->where("id",'<>',$subject->stage->id)->get();

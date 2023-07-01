@@ -37,13 +37,28 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
         })->name("files.index",);
 
     });
+    Route::get('/home', function () {
+        return view('admin.dashboard');
+    })->name('home');
 });
 
 
 Route::group(['middleware' => ['role:admin','auth']], function () {
-    Route::get('/stages', function () {
-        return view('admin.stages');
-    })->name("stages.index");
+
+    Route::group(['prefix'=>"/stages"],function(){
+        Route::get('/', function () {
+            return view('admin.stages',["type"=>"view"]);
+        })->name("stages.index");
+        Route::get('/create',function (){
+            return view('admin.stages',["type"=>"create"]);
+        })->name("stages.create");
+
+        Route::get('/edit/{id}',function ($id){
+            return view('admin.stages',["type"=>"edit",'id'=>$id]);
+        })->name("stages.edit");
+
+    });
+
 
    
 
@@ -62,7 +77,10 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
             return view('admin.subjects',["type"=>"view_one","id"=>$id]);
         })->name("subjects.show");
 
+
+
     });
+
 
 });
 Route::group(['middleware' => ['role:teacher','auth']],function(){
