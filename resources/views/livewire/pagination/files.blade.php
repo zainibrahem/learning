@@ -24,7 +24,7 @@
                                 <div class="row">
                                     <div class="col-lg-6"><div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">File:</label>
-                                            <input type="file" class="form-control" id="recipient-name"  wire:model="file">
+                                            <input type="file" class="form-control fileupload" id="recipient-name"  wire:model="file">
                                             @error('file')<span class="error"
                                                                 style="margin-top: 0.25rem;font-size: 0.875em;color: #c03221;">{{ $message }}</span>@enderror
                                         </div></div>
@@ -150,6 +150,7 @@
         @endif
 
     </div>
-
+    <script>
+    </script>
 
 </div>

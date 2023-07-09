@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\PDF as PDFModel;
+use App\Models\File;
 
 class PDFEditorController extends Controller
 {
@@ -13,35 +14,14 @@ class PDFEditorController extends Controller
         // Return the view for the PDF upload form
         return view('pdf.upload');
     }
-
-    public function upload(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|mimes:pdf|max:2048',
-        ]);
-
-        // Store the uploaded PDF file
-        $file = $request->file('file');
-        $path = $file->store('pdfs');
-
-        // Create a new PDF model instance
-        $pdf = new PDFModel;
-        $pdf->path = $path;
-        $pdf->save();
-
-        // Redirect to the PDF editing form
-        return redirect()->route('pdf.edit', $pdf->id);
-    }
-
     public function edit($id)
     {
-        // Retrieve the PDF model by ID
-        $pdf = PDFModel::findOrFail($id);
-
-        // Return the view for the PDF editing form
-        return view('pdf.edit', compact('pdf'));
+        $file = File::findOrFail($id);
+        return view('pdf.edit',compact('file'));
     }
+
+
+   
 
     public function save(Request $request, $id)
     {

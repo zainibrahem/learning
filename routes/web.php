@@ -27,24 +27,19 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
     Route::get('/getMiroCode',[MiroController::class,'getMiroCode']);
     Route::get('/board',[TeacherController::class,'board']);
 
-    // Route for displaying the PDF upload form
-    Route::get('/pdf/upload', [PDFEditorController::class, 'showUploadForm'])->name('pdf.upload');
+    Route::get('/draw-pdf/{id}', [PDFEditorController::class,'edit'])->name('draw-pdf');
 
-    // Route for handling the PDF upload
-    Route::post('/pdf/upload', [PDFEditorController::class, 'upload'])->name('pdf.upload');
 
-    // Route for displaying the PDF editing form
-    Route::get('/pdf/{id}/edit', [PDFEditorController::class, 'edit'])->name('pdf.edit');
 
-    // Route for saving the edited PDF
-    Route::post('/pdf/{id}/save', [PDFEditorController::class, 'save'])->name('pdf.save');
+    Route::group(['prefix'=>"/files"],function(){
+        Route::get('/', function () {
+            return view('admin.files');
+        })->name("files.index",);
 
-    // Route for downloading the edited PDF
-    Route::get('/pdf/{id}/download', [PDFEditorController::class, 'download'])->name('pdf.download');
+    });
     Route::get('/home', function () {
         return view('admin.dashboard');
     })->name('home');
-
 });
 
 
@@ -64,6 +59,7 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
 
     });
     Route::post('/add-questions',[\App\Http\Controllers\QuizController::class,'addQestions'])->name("question.add");
+
 
 
     Route::group(['prefix'=>"/files"],function(){
@@ -95,6 +91,12 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
     });
 
 
+});
+Route::group(['middleware' => ['role:teacher','auth']],function(){
+    Route::get('choosestages',[TeacherController::class,'stages']);
+    Route::get('/stage/{id}/subject',[TeacherController::class,'stagesSubjects']);
+    Route::get('/subject/{id}/files',[TeacherController::class,'subjectFiles']);
+    Route::get('/home',[TeacherController::class,'stages']);
     Route::group(['prefix'=>"/subjects"],function(){
 
         Route::get('/', function () {
