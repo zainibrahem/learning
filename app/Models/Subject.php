@@ -39,5 +39,9 @@ class Subject extends Model
         return $this->hasMany(File::class,'subject_id','id');
     }
 
+    public function questions():HasMany{
+        return $this->hasMany(QuizQuestions::class,'id');
+    }
+
 
 }

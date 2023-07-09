@@ -63,12 +63,15 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
         })->name("stages.edit");
 
     });
+    Route::post('/add-questions',[\App\Http\Controllers\QuizController::class,'addQestions'])->name("question.add");
 
 
     Route::group(['prefix'=>"/files"],function(){
         Route::get('/', function () {
             return view('admin.files');
         })->name("files.index",);
+
+
 
     });
 
@@ -90,6 +93,51 @@ Route::group(['middleware' => ['role:admin','auth']], function () {
 
 
     });
+
+
+    Route::group(['prefix'=>"/subjects"],function(){
+
+        Route::get('/', function () {
+            return view('admin.subjects',["type"=>"view"]);
+        })->name("subjects.index",);
+
+        Route::get('/create', function () {
+
+            return view('admin.subjects',["type"=>"create"]);
+        })->name("subject.create");
+
+        Route::get('/show/{id}', function ($id) {
+            return view('admin.subjects',["type"=>"view_one","id"=>$id]);
+        })->name("subjects.show");
+
+
+
+    });
+
+    Route::group(['prefix'=>"/quiz"],function(){
+
+        Route::get('/', function () {
+            return view('admin.quiz');
+        })->name("quiz.create",);
+
+    });
+
+    Route::group(['prefix'=>"/questions"],function(){
+        Route::get('/', function () {
+            return view('admin.questions',["type"=>"view"]);
+        })->name('questions.index',);
+
+        Route::get('/create', function () {
+            return view('admin.questions',["type"=>"create"]);
+        })->name('questions.create',);
+
+        Route::get('/edit/{id}', function ($id) {
+            return view('admin.questions',["type"=>"edit",'id'=>$id]);
+        })->name('question.edit',);
+
+    });
+
+
 
 
 });
