@@ -48,7 +48,7 @@
                     @else
                         <form wire:submit.prevent="submit">
                             <div class="row">
-                                <div class="acc-edit  col-lg-6">
+                                <div class="acc-edit  col-lg-12">
 
                                     <div class="form-group">
                                         <label wire:dirty.class=" text-bg-danger" wire:target="name" for="name">
@@ -71,7 +71,7 @@
                                         <div class="row pt-5">
                                             @foreach($question->options as $item)
 
-                                                <div class="card" style="width: 18rem;">
+                                                <div class="card col-lg-2" style="width: 18rem;">
 
                                                     <div class="card-body">
                                                         <h5 class="card-title">{{$item->name}}</h5>
