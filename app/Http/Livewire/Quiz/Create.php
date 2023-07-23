@@ -43,7 +43,8 @@ class Create extends Component
 
         $quiz = Quiz::query()->create(['name' => $valid["name"], 'subject_id' => $valid["subject"]]);
         $quiz->questions()->attach($valid['selectedQuestion']);
-        return redirect()->back()->with('success', 'created !');
+        return redirect()->to("quiz")->with('success','Quiz '.$valid["name"].' Created !');
+
     }
 
 
@@ -74,6 +75,7 @@ class Create extends Component
     public function setSelectedQuestion($item)
     {
         if (!is_null($item)) {
+
             array_push($this->selectedQuestion, $item);
 
             $this->selectedQuestions = QuizQuestions::query()->whereIn("id", $this->selectedQuestion)->get();

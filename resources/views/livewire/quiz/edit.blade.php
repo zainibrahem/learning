@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-                <h4 class="card-title">Create new Quiz</h4>
+                <h4 class="card-title">Edit {{$name}}</h4>
             </div>
         </div>
         <div class="card-body">
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="pt-5">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                            <button class="btn btn-primary" type="submit">Edit Quiz </button>
                         </div>
                     </form>
                 </div>

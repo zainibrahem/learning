@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="pt-5">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                            <button class="btn btn-primary" type="submit">Create Quiz</button>
                         </div>
                     </form>
                 </div>
