@@ -51,6 +51,9 @@ Route::group(['middleware' => ['role:admin|teacher','auth']], function () {
         Route::get('/create', function () {
             return view('admin.quiz',['type'=>"add"]);
         })->name("quiz.add",);
+        Route::get('/edit/{id}', function ($id) {
+            return view('admin.quiz',['type'=>"edit",'data'=>$id]);
+        })->name("quiz.edit",);
 
     });
     Route::group(['prefix'=>"/questions"],function(){

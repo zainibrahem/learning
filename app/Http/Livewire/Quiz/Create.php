@@ -11,6 +11,7 @@ class Create extends Component
 {
 
     public $subject;
+
     public $selectedSubject;
     public $name;
     public $questions = null;
@@ -20,7 +21,7 @@ class Create extends Component
     protected $rules = [
         'name' => 'required|string|min:4',
         'subject' => 'required|exists:subjects,id',
-        'selectedQuestion'=>'required|array|min:2'
+        'selectedQuestion' => 'required|array|min:2'
     ];
 
 
@@ -40,15 +41,16 @@ class Create extends Component
     {
         $valid = $this->validate();
 
-       $quiz= Quiz::query()->create(['name'=>$valid["name"],'subject_id'=>$valid["subject"]]);
+        $quiz = Quiz::query()->create(['name' => $valid["name"], 'subject_id' => $valid["subject"]]);
         $quiz->questions()->attach($valid['selectedQuestion']);
+        return redirect()->back()->with('success', 'created !');
     }
 
 
     public function addSubject($id)
     {
 
-        if (!is_null($id) && $id!=$this->selectedSubject) {
+        if (!is_null($id) && $id != $this->selectedSubject) {
             $this->selectedSubject = $id;
             $this->questions = Subject::query()->where("id", $this->subject)->first()->questions;
 

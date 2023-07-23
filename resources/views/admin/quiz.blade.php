@@ -6,4 +6,8 @@
     @if($type=="add")
         <livewire:quiz.create />
     @endif
+    @if($type=="edit")
+
+        @livewire('quiz.edit', ['data' => $data])
+    @endif
 @endsection
