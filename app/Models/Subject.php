@@ -40,7 +40,7 @@ class Subject extends Model
     }
 
     public function questions():HasMany{
-        return $this->hasMany(QuizQuestions::class,'id');
+        return $this->hasMany(QuizQuestions::class,'subject_id','id');
     }
 
 

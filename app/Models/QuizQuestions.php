@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\CreatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -30,5 +31,9 @@ class QuizQuestions extends Model
 
     public function options():HasMany{
         return $this->hasMany(QuizOptions::class,'question_id','id');
+    }
+
+    public function quiz():BelongsToMany{
+        return $this->belongsToMany(Quiz::class,'quiz_question','question_id','question_id');
     }
 }
